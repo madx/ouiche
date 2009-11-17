@@ -1,0 +1,106 @@
+body {
+  width: 500px;
+  margin: 5% auto;
+  font: normal 1.5em sans-serif;
+  color: #333;
+}
+
+a:link, a:visited {
+  color: #0cf;
+  text-decoration: none;
+}
+
+a:hover, a:focus, a:active {
+  text-decoration: underline;
+}
+
+h1 {
+  margin-bottom: 0;
+  padding: 0.1em 0.5em;
+  background-color: black;
+  color: white;
+  -moz-border-radius: 12px 12px 0 0;
+  -webkit-border-radius: 12px 12px 0 0;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+}
+
+ul li, #error {
+  margin: 0.5em 0;
+}
+
+p#foot {
+  color: white;
+  background-color: black;
+  -moz-border-radius: 0 0 12px 12px;
+  -webkit-border-radius: 0 0 12px 12px;
+  font-size: 0.5em;
+  padding: 0.5em;
+  text-align: center;
+  font-style: italic;
+}
+
+#lists a:link, #lists a:visited {
+  display: block;
+  padding: 0.5em;
+  background-color: #333;
+}
+
+#lists a:hover, #lists a:focus, #lists a:active {
+  background-color: #444;
+  color: #0cf;
+  text-decoration: none;
+}
+
+#list li {
+  background-color: #666;
+  padding: 0.5em;
+  font-size: 0.75em;
+  color: white;
+  line-height: 140%;
+}
+
+#list a {
+  color: #0ef;
+}
+
+#error {
+  background-color: #f66;
+  padding: 0.5em;
+  font-size: 0.75em;
+  color: black;
+}
+
+#error a:link, #error a:visited {
+  color: #500;
+  font-weight: bold;
+}
+
+#error a:hover, #error a:focus, #error a:active {
+  text-decoration: underline;
+}
+
+/* Formatting styles */
+
+li code {
+  background-color: #eee;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 0 2px;
+}
+
+li pre {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  font-size: 0.8em;
+  overflow: auto;
+}
+
+li pre code {
+  border: none;
+  padding: 0;
+}
