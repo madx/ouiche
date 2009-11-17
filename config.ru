@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'ouiche')
+require ::File.join(::File.dirname(__FILE__), 'ouiche')
 
 Ouiche.load!
 
