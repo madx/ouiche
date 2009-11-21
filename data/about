@@ -10,9 +10,16 @@ About Ouiche
   generates an index page for you if you have multiple lists.
 * Generated HTML is clean, and the stylesheet is very short, so you can easily
   customize Ouiche to fit your design needs.
-* Last but not least, Ouiche is completely Open-Source (published under the 
+* Last but not least, Ouiche is _completely_ Open-Source (published under the
   WTFPL): you can do whatever you want with the source code, and I'll
   happily accept any patches or improvements (use GitHub for that!)
+* Install is simple, just copy the files and create or modify the `config.ru`
+  file:
+  {{{
+    require ::File.join(::File.dirname(__FILE__), 'ouiche')
+    Ouiche.load!
+    run Ouiche::App
+  }}}
 ---
 ruby: "http://ruby-lang.org/"
 sinatra: "http://sinatra.github.com/"

@@ -41,7 +41,7 @@ module Ouiche
   class Formatter < String
     def to_html(slug)
       gsub(/\{\{\{(.*?)\}\}\}/m) {
-        preserve = $~[1].strip.gsub(/\n {0,2}/, '&#10;').gsub(/(.)/, '\\\\\1')
+        preserve = $~[1].strip.gsub(/\n {0,4}/, '&#10;').gsub(/(.)/, '\\\\\1')
         "{{{#{preserve}}}}"
       }.gsub(/\\([^\\\n]|\\(?!\n))/) { "&MarkupEscape#{$&[1]};" }.
         gsub(/&(?!#\d+;|#x[\da-fA-F]+;|\w+;)/, "&amp;").
