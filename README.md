@@ -26,12 +26,12 @@ stripped) as the url of your list, so be smart when naming these files!
 
 The file format is easy:
 
-  title
-  ---
-  * item
-  * other item
-  ---
-  links in yaml format
+    title
+    ---
+    * item
+    * other item
+    ---
+    links in yaml format
 
 The title will be used as the page title (awesome!), the part between the `---`'s
 will be split on leading `*`'s and returned elements parsed with
