@@ -53,7 +53,7 @@ module Ouiche
         gsub(/_(.*?)_(?=\W|$)/,    '<em>\1</em>').
         gsub(/`(.*?)`(?=\W|$)/,    '<code>\1</code>').
         gsub(/~(.*?)~(?=\W|$)/,    '<del>\1</del>').
-        gsub(/(?![^&])#(\w+)/,            '/'+slug+'/@/\1').
+        gsub(/#(\w+)/,            '/'+slug+'/@/\1').
         gsub(/\[(\S+)\]/,         '<a href="\1">\1</a>').
         gsub(/\[(.*?)\s?(\S+)\]/, '<a href="\2">\1</a>').
         gsub(/\\\\\n/, "<br />\n").
@@ -146,6 +146,7 @@ __END__
 %html{html_attrs}
   %head
     %title= make_title
+    %meta{'http-equiv' => 'Content-Type', :content => "text/html;charset=utf-8"}
     %link{:rel => 'stylesheet', :href => '/style.css', :type => 'text/css', :media => 'screen', :charset => 'utf-8'}
   %body
     %h1= @title
