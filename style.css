@@ -12,6 +12,7 @@ a:link, a:visited {
 
 a:hover, a:focus, a:active {
   text-decoration: underline;
+  outline: none;
 }
 
 h1 {
@@ -22,53 +23,25 @@ h1 {
   -moz-border-radius: 12px 12px 0 0;
   -webkit-border-radius: 12px 12px 0 0;
 }
-
-ul {
-  padding: 0;
-  list-style-type: none;
-  margin: 0;
-}
-
-ul li, #error {
-  margin: 0.5em 0;
-}
-
-p#foot {
-  color: white;
-  background-color: black;
-  -moz-border-radius: 0 0 12px 12px;
-  -webkit-border-radius: 0 0 12px 12px;
-  font-size: 0.5em;
-  padding: 0.5em;
-  text-align: center;
-  font-style: italic;
-}
-
-#lists a:link, #lists a:visited {
-  display: block;
-  padding: 0.5em;
-  background-color: #333;
-}
-
-#lists a:hover, #lists a:focus, #lists a:active {
-  background-color: #444;
-  color: #0cf;
+h1 a:hover, h1 a:focus, h1 a:active {
+  color: #1df;
   text-decoration: none;
 }
 
-#list li {
-  background-color: #666;
+#page {
+  background-color: #555;
   padding: 0.5em;
+  margin: 0.5em 0;
   font-size: 0.75em;
   color: white;
   line-height: 140%;
 }
-
-#list a {
-  color: #0ef;
-}
+#page a             { color: #0ef;      }
+#page *:first-child { margin-top: 0;    }
+#page *:last-child  { margin-bottom: 0; }
 
 #error {
+  margin: 0.5em 0;
   background-color: #f66;
   padding: 0.5em;
   font-size: 0.75em;
@@ -84,23 +57,56 @@ p#foot {
   text-decoration: underline;
 }
 
-/* Formatting styles */
+#menu {
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+}
 
-li code {
+#menu li {
+  margin: 0.5em 0;
+}
+
+#menu a:link, #menu a:visited {
+  display: block;
+  padding: 0.5em;
+  background-color: #333;
+}
+
+#menu a:hover, #menu a:focus, #menu a:active {
+  background-color: #444;
+  color: #0cf;
+  text-decoration: none;
+}
+
+#foot {
+  margin: 0;
+  color: white;
+  background-color: black;
+  -moz-border-radius: 0 0 12px 12px;
+  -webkit-border-radius: 0 0 12px 12px;
+  font-size: 0.5em;
+  padding: 0.5em;
+  text-align: center;
+  font-style: italic;
+}
+
+
+#page code {
   background-color: #eee;
   color: #333;
   border: 1px solid #ccc;
   padding: 0 2px;
 }
 
-li pre {
+#page pre {
   background-color: #eee;
   border: 1px solid #ccc;
   font-size: 0.8em;
   overflow: auto;
 }
 
-li pre code {
+#page pre code {
   border: none;
   padding: 0;
 }

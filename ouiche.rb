@@ -7,34 +7,45 @@ $KCODE='u' if RUBY_VERSION < '1.9.0'
 
 module Ouiche
   DATADIR = File.join(File.dirname(__FILE__), 'data')
+  GLOB    = File.join(DATADIR, '*')
 
   Words = {
-    :lists   => 'Lists',
+    :index   => 'Index',
     :error   => 'Error',
     :no_link => 'No such link.<br /> <a href="/">Return to home</a>',
-    :no_list => 'No such list.<br /> <a href="/">Return to home</a>',
-    :power => 'powered by <a href="http://github.com/madx/ouiche">Ouiche</a>'
+    :no_page => 'No such page.<br /> <a href="/">Return to home</a>',
+    :back    => '<a href="/" title="Return to index">←</a>',
+    :power   => 'powered by <a href="http://github.com/madx/ouiche">Ouiche</a>'
   }
 
-  Lists = {}
+  class << self
+    def pages
+      [].tap { |res|
+        Dir[GLOB].each do |f|
+          next if File.directory?(f)
+          File.open(f, 'r') do |io|
+            res << OpenStruct.new({
+              :slug  => File.basename(f),
+              :title => io.readline.chomp
+            })
+          end
+        end
+      }.reject {|p| p.slug[0] == ':'[0] }
+    end
 
-  def self.read(file)
-    title, items, links = File.read(file).split(/^---+$/).map {|l| l.strip }
-    Lists[slug=File.basename(file, File.extname(file))] = OpenStruct.new({
-      :title => title,
-      :links => YAML.load(links),
-      :items => items.split(/^\*/)[1..-1].map {|item|
-        Formatter.new(item.strip).to_html(slug)
-      }
-    })
-  end
+    def slugs
+      Dir[GLOB].map {|f| File.basename(f) }
+    end
 
-  def self.load!
-    Dir[File.join(DATADIR, '*')].each {|f| read(f) }
-  end
-
-  def self.[](key)
-    Lists[key]
+    def read(slug)
+      file = File.join(DATADIR, slug)
+      title, body, links = File.read(file).split(/^---+$/).map {|l| l.strip }
+      OpenStruct.new({
+        :title => title,
+        :body  => Formatter.new(body).to_html(slug),
+        :links => YAML.load(links || "")
+      })
+    end
   end
 
   # Code stolen and adapted from Challis
@@ -46,9 +57,9 @@ module Ouiche
       }.gsub(/\\([^\\\n]|\\(?!\n))/) { "&MarkupEscape#{$&[1]};" }.
         gsub(/&(?!#\d+;|#x[\da-fA-F]+;|\w+;)/, "&amp;").
         gsub(/^ {0,2}/, '').
-        gsub('<', '&lt;').
-        gsub('>', '&gt;').
-        gsub('"', '&quot;').
+        # gsub('<', '&lt;').
+        # gsub('>', '&gt;').
+        # gsub('"', '&quot;').
         gsub(/\*(.*?)\*(?=\W|$)/,  '<strong>\1</strong>').
         gsub(/_(.*?)_(?=\W|$)/,    '<em>\1</em>').
         gsub(/`(.*?)`(?=\W|$)/,    '<code>\1</code>').
@@ -66,8 +77,8 @@ module Ouiche
   class App < Sinatra::Base
     helpers do
       def make_title
-        if Ouiche[params[:list]]
-          "#{Ouiche[params[:list]].title} — Ouiche"
+        if @page
+          "#{@page.title} — Ouiche"
         else
           'Ouiche'
         end
@@ -75,16 +86,14 @@ module Ouiche
     end
 
     configure do
-      set :haml, :attr_wrapper => '"'
+      set    :haml, :attr_wrapper => '"'
+      enable :inline_templates
     end
 
     get '/' do
-      if Ouiche::Lists.keys.size == 1
-        redirect '/' + Ouiche::Lists.keys.first
-      else
-        @title = Ouiche::Words[:lists]
-        haml :index
-      end
+      @title = Ouiche::Words[:index]
+      @index = Ouiche.read(':index')
+      haml :index
     end
 
     get '/style.css' do
@@ -92,54 +101,48 @@ module Ouiche
       File.read(File.join(File.dirname(__FILE__), 'style.css'))
     end
 
-    get '/_sync' do
-      Ouiche.load!
-      redirect '/'
-    end
-
-    get '/:list' do
-      if @list = Ouiche[params[:list]]
-        @title = @list.title
-        haml :list
+    get '/:page' do
+      if Ouiche.slugs.member?(params[:page])
+        @page  = Ouiche.read(params[:page])
+        @title = @page.title
+        haml :page
       else
         response.status = 404
         @title = Ouiche::Words[:error]
-        haml :no_list
+        haml :no_page
       end
     end
 
-    get '/:list/@/:link' do
+    get '/:page/@/:link' do
       @title = Ouiche::Words[:error]
 
-      if list = Ouiche[params[:list]]
-        if list.links && list.links[params[:link]]
-          redirect list.links[params[:link]]
+      if Ouiche.slugs.member?(params[:page])
+        page = Ouiche.read(params[:page])
+        if page.links && page.links[params[:link]]
+          redirect page.links[params[:link]]
         else
           response.status = 404
           haml :no_link
         end
       else
         response.status = 404
-        haml :no_list
+        haml :no_page
       end
     end
-
-    use_in_file_templates!
   end
 
 end
 
 __END__
 @@ index
-%ul#lists
-  - Ouiche::Lists.keys.sort.each do |list|
+#page= @index.body
+%ul#menu
+  - Ouiche.pages.each do |page|
     %li
-      %a{ :href => '/'+list }= Ouiche[list].title
+      %a{ :href => '/' + page.slug }= page.title
 
-@@ list
-%ul#list
-  - @list.items.each do |item|
-    %li= item
+@@ page
+#page= @page.body
 
 @@ layout
 !!! Strict
@@ -149,12 +152,14 @@ __END__
     %meta{'http-equiv' => 'Content-Type', :content => "text/html;charset=utf-8"}
     %link{:rel => 'stylesheet', :href => '/style.css', :type => 'text/css', :media => 'screen', :charset => 'utf-8'}
   %body
-    %h1= @title
+    %h1
+      = Ouiche::Words[:back] if @page
+      = @title
     = yield
     %p#foot= Ouiche::Words[:power]
 
-@@ no_list
-%p#error= Ouiche::Words[:no_list]
+@@ no_page
+%p#error= Ouiche::Words[:no_page]
 
 @@ no_link
-%p#error= Ouiche::Words[:no_list]
+%p#error= Ouiche::Words[:no_link]

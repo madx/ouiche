@@ -1,25 +1,44 @@
 About Ouiche
 ---
-* Ouiche is a system that helps you publishing lists.\\
-  You can use it to share your wishlists, store bookmarks, manage your
-  todolists, etc.
-* Ouiche is written in [Ruby #ruby] with the lightweight [Sinatra #sinatra]
+<p>
+  Ouiche is a wiki-like system that helps you publishing pages about whatever
+  you want.\\
+  It was originally designed to publish wishlists.
+</p>
+
+<p>
+  Ouiche is written in [Ruby #ruby] with the lightweight [Sinatra #sinatra]
   web framework. The source is available [on Github #source].
-* Lists are stored in plain text files and are written in a compact and easy to
-  learn format. Ouiche auto-discovers lists that are in it's data folder and
-  generates an index page for you if you have multiple lists.
-* Generated HTML is clean, and the stylesheet is very short, so you can easily
-  customize Ouiche to fit your design needs.
-* Last but not least, Ouiche is _completely_ Open-Source (published under the
-  WTFPL): you can do whatever you want with the source code, and I'll
-  happily accept any patches or improvements (use GitHub for that!)
-* Install is simple, just copy the files and create or modify the `config.ru`
+</p>
+
+<p>
+  Pages are stored in a HTML/Textile mixture format which provides many
+  shortcuts to avoid typing inline tags. Ouiche auto-discovers files that are
+  in it's data folder and generates an index page for you.\\
+  If you don't want a page to show up in the index, just prepend a colon (:) to
+  it's filename.\\
+  Look at the default about page to learn more about what you can do.
+<p>
+
+<p>
+  Ouiche is _completely_ Open-Source (published under the WTFPL): you can do
+  whatever you want with the source code, and I'll happily accept any patches or
+  improvements (use GitHub for that!)
+</p>
+
+<p>
+  Install is simple, just copy the files and create or modify the `config.ru`
   file:
-  {{{
-    require ::File.join(::File.dirname(__FILE__), 'ouiche')
-    Ouiche.load!
-    run Ouiche::App
-  }}}
+</p>
+
+{{{
+  require ::File.join(::File.dirname(__FILE__), 'ouiche')
+  run Ouiche::App
+}}}
+
+<p>
+  Then `rackup` it to launch the web server.
+</p>
 ---
 ruby: "http://ruby-lang.org/"
 sinatra: "http://sinatra.github.com/"
