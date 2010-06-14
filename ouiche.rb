@@ -12,8 +12,8 @@ module Ouiche
   Words = {
     :index   => 'Index',
     :error   => 'Error',
-    :no_link => 'No such link.<br /> <a href="/">Return to home</a>',
-    :no_page => 'No such page.<br /> <a href="/">Return to home</a>',
+    :no_link => 'No such link.<br /> <a href="/">Return to index</a>',
+    :no_page => 'No such page.<br /> <a href="/">Return to index</a>',
     :back    => '<a href="/" title="Return to index">←</a>',
     :power   => 'powered by <a href="http://github.com/madx/ouiche">Ouiche</a>'
   }
