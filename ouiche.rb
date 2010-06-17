@@ -1,4 +1,4 @@
-#coding: utf-8
+# encoding: utf-8
 %w(sinatra/base haml time yaml ostruct).each do |lib|
   require lib
 end
