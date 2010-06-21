@@ -1,45 +1,31 @@
 About Ouiche
 ---
-<p>
-  Ouiche is a wiki-like system that helps you publishing pages about whatever
-  you want.\\
-  It was originally designed to publish wishlists.
-</p>
+Ouiche is a lightweight personal wiki engine that uses flat text files.
 
-<p>
-  Ouiche is written in [Ruby #ruby] with the lightweight [Sinatra #sinatra]
-  web framework. The source is available [on Github #source].
-</p>
+Ouiche is written in [Ruby][1] with the [Sinatra][2] web framework. The data files are
+written in Markdown, so you need to have
+[RDiscount][3].
 
-<p>
-  Pages are stored in a HTML/Textile mixture format which provides many
-  shortcuts to avoid typing inline tags. Ouiche auto-discovers files that are
-  in it's data folder and generates an index page for you.\\
-  If you don't want a page to show up in the index, just prepend a colon (:) to
-  it's filename.\\
-  Look at the default about page to learn more about what you can do.
-<p>
+[1]: http://ruby-lang.org/
+[2]: http://sinatra.github.com/
+[3]: http://github.com/rtomayko/rdiscount
 
-<p>
-  Ouiche is _completely_ Open-Source (published under the WTFPL): you can do
-  whatever you want with the source code, and I'll happily accept any patches or
-  improvements (use GitHub for that!)
-</p>
+It is completely Open-Source (published under the WTFPL): you can do whatever
+you want with the source code, and I'll happily accept any patches or
+improvements (use GitHub for that!). If we meet, you can also buy me a beer :)
 
-<p>
-  Install is simple, just copy the files and create or modify the `config.ru`
-  file:
-</p>
+## Usage #######################################################################
 
-{{{
-  require ::File.join(::File.dirname(__FILE__), 'ouiche')
-  run Ouiche::App
-}}}
+Lists are stored in the `data/` folder.
 
-<p>
-  Then `rackup` it to launch the web server.
-</p>
----
-ruby: "http://ruby-lang.org/"
-sinatra: "http://sinatra.github.com/"
-source: "http://github.com/madx/ouiche"
+The file format is easy:
+
+    Title
+    ---
+    Some text in Markdown.
+
+The title will be used as the page title (awesome!), the part after the `---`'s
+will be the body of the page. Dot.
+
+If you want a list to be skipped in the index page, just prepend the filename
+with a `+`.

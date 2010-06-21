@@ -1,5 +1,5 @@
 # encoding: utf-8
-%w(sinatra/base haml time yaml ostruct).each do |lib|
+%w(sinatra/base haml time yaml ostruct rdiscount).each do |lib|
   require lib
 end
 
@@ -42,46 +42,15 @@ module Ouiche
       title, body, links = File.read(file).split(/^---+$/).map {|l| l.strip }
       OpenStruct.new({
         :title => title,
-        :body  => Formatter.new(body).to_html(slug),
-        :links => YAML.load(links || "")
+        :body  => Markdown.new(body).to_html
       })
-    end
-  end
-
-  # Code stolen and adapted from Challis
-  class Formatter < String
-    def to_html(slug)
-      gsub(/\{\{\{(.*?)\}\}\}/m) {
-        preserve = $~[1].strip.gsub(/\n {0,4}/, '&#10;').gsub(/(.)/, '\\\\\1')
-        "{{{#{preserve}}}}"
-      }.gsub(/\\([^\\\n]|\\(?!\n))/) { "&MarkupEscape#{$&[1]};" }.
-        gsub(/&(?!#\d+;|#x[\da-fA-F]+;|\w+;)/, "&amp;").
-        gsub(/^ {0,2}/, '').
-        # gsub('<', '&lt;').
-        # gsub('>', '&gt;').
-        # gsub('"', '&quot;').
-        gsub(/\*(.*?)\*(?=\W|$)/,  '<strong>\1</strong>').
-        gsub(/_(.*?)_(?=\W|$)/,    '<em>\1</em>').
-        gsub(/`(.*?)`(?=\W|$)/,    '<code>\1</code>').
-        gsub(/~(.*?)~(?=\W|$)/,    '<del>\1</del>').
-        gsub(/#(\w+)/,            '/'+slug+'/@/\1').
-        gsub(/\[(\S+)\]/,         '<a href="\1">\1</a>').
-        gsub(/\[(.*?)\s?(\S+)\]/, '<a href="\2">\1</a>').
-        gsub(/\\\\\n/, "<br />\n").
-        gsub(/\{\{\{(.*?)\}\}\}/, '<pre><code>\1</code></pre>').
-        gsub(/&MarkupEscape(\d+);/) { $1.to_i.chr }.
-        strip
     end
   end
 
   class App < Sinatra::Base
     helpers do
       def make_title
-        if @page
-          "#{@page.title} — Ouiche"
-        else
-          'Ouiche'
-        end
+        
       end
     end
 
@@ -112,25 +81,7 @@ module Ouiche
         haml :no_page
       end
     end
-
-    get '/:page/@/:link' do
-      @title = Ouiche::Words[:error]
-
-      if Ouiche.slugs.member?(params[:page])
-        page = Ouiche.read(params[:page])
-        if page.links && page.links[params[:link]]
-          redirect page.links[params[:link]]
-        else
-          response.status = 404
-          haml :no_link
-        end
-      else
-        response.status = 404
-        haml :no_page
-      end
-    end
   end
-
 end
 
 __END__
@@ -148,7 +99,7 @@ __END__
 !!! Strict
 %html{html_attrs}
   %head
-    %title= make_title
+    %title== #{("%s -" % @page.title) if @page} Ouiche
     %meta{'http-equiv' => 'Content-Type', :content => "text/html;charset=utf-8"}
     %link{:rel => 'stylesheet', :href => '/style.css', :type => 'text/css', :media => 'screen', :charset => 'utf-8'}
   %body
