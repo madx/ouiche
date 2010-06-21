@@ -30,7 +30,7 @@ module Ouiche
             })
           end
         end
-      }.reject {|p| p.slug[0] == ':'[0] }
+      }.reject {|p| p.slug[0] == '+'[0] }
     end
 
     def slugs
@@ -92,7 +92,7 @@ module Ouiche
 
     get '/' do
       @title = Ouiche::Words[:index]
-      @index = Ouiche.read(':index')
+      @index = Ouiche.read('+index')
       haml :index
     end
 
