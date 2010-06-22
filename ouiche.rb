@@ -48,12 +48,6 @@ module Ouiche
   end
 
   class App < Sinatra::Base
-    helpers do
-      def make_title
-        
-      end
-    end
-
     configure do
       set    :haml, :attr_wrapper => '"'
       enable :inline_templates
