@@ -3,17 +3,16 @@ Ouiche
 
 Ouiche is a lightweight personal wiki engine that uses flat text files.
 
-Ouiche is written in [Ruby][1] with the [Sinatra][2] web framework. The data files are
-written in Markdown, so you need to have
-[RDiscount][3].
-
-[1]: http://ruby-lang.org/
-[2]: http://sinatra.github.com/
-[3]: http://github.com/rtomayko/rdiscount
+Ouiche is written in [Ruby][1] with the [Sinatra][2] web framework. The data
+files are written in Markdown, so you need to have [RDiscount][3].
 
 It is completely Open-Source (published under the WTFPL): you can do whatever
 you want with the source code, and I'll happily accept any patches or
 improvements (use GitHub for that!). If we meet, you can also buy me a beer :)
+
+[1]: http://ruby-lang.org/
+[2]: http://sinatra.github.com/
+[3]: http://github.com/rtomayko/rdiscount
 
 ## Usage #######################################################################
 
@@ -26,7 +25,7 @@ The file format is easy:
     Some text in Markdown.
 
 The title will be used as the page title (awesome!), the part after the `---`'s
-will be the body of the page. Dot.
+will be the body of the page. Period.
 
-If you want a list to be skipped in the index page, just prepend the filename
+If you want a page to be skipped in the index page, just prepend the filename
 with a `+`.
