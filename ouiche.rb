@@ -53,15 +53,14 @@ module Ouiche
     end
 
     helpers do
-      def serve(page)
-        if Ouiche.slugs.member?(page)
-          @page  = Ouiche.read(page)
-          @title = @page.title
-          haml :page
-        else
+      def open(page)
+        if !Ouiche.slugs.member?(page)
           response.status = 404
           @title = Ouiche::Words[:error]
           haml :no_page
+        else
+          @page  = Ouiche.read(page)
+          @title = @page.title
         end
       end
     end
@@ -78,11 +77,13 @@ module Ouiche
     end
 
     get '/:page' do
-      serve params[:page]
+      open(params[:page])
+      haml :page
     end
 
     get '/p/:page' do
-      serve '+' + params[:page]
+      open('+' + params[:page])
+      haml :page
     end
   end
 end
