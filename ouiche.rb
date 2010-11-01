@@ -10,12 +10,11 @@ module Ouiche
   GLOB    = File.join(DATADIR, '*')
 
   Words = {
-    :index   => 'Index',
+    :title   => 'Index',
     :error   => 'Error',
-    :no_link => 'No such link.<br /> <a href="/">Return to index</a>',
     :no_page => 'No such page.<br /> <a href="/">Return to index</a>',
-    :back    => '<a href="/" title="Return to index">←</a>',
-    :power   => 'powered by <a href="http://github.com/madx/ouiche">Ouiche</a>'
+    :go_home => '<a href="/" title="Return to index">↑</a>',
+    :powered => 'powered by <a href="http://github.com/madx/ouiche">Ouiche</a>'
   }
 
   class << self
@@ -54,7 +53,7 @@ module Ouiche
     end
 
     get '/' do
-      @title = Ouiche::Words[:index]
+      @title = Ouiche::Words[:title]
       @index = Ouiche.read('+index')
       haml :index
     end
@@ -80,14 +79,15 @@ end
 
 __END__
 @@ index
-#page= @index.body
+#page~ @index.body
 %ul#menu
   - Ouiche.pages.each do |page|
     %li
       %a{ :href => '/' + page.slug }= page.title
 
 @@ page
-#page= @page.body
+#go_home= Ouiche::Words[:go_home]
+#page~ @page.body
 
 @@ layout
 !!! Strict
@@ -97,14 +97,10 @@ __END__
     %meta{'http-equiv' => 'Content-Type', :content => "text/html;charset=utf-8"}
     %link{:rel => 'stylesheet', :href => '/style.css', :type => 'text/css', :media => 'screen', :charset => 'utf-8'}
   %body
-    %h1
-      = Ouiche::Words[:back] if @page
-      = @title
-    = yield
-    %p#foot= Ouiche::Words[:power]
+    #ouiche
+      %h1= @title
+      = yield
+      %p#foot= Ouiche::Words[:powered]
 
 @@ no_page
 %p#error= Ouiche::Words[:no_page]
-
-@@ no_link
-%p#error= Ouiche::Words[:no_link]

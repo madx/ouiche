@@ -1,6 +1,6 @@
 require ::File.join(::File.dirname(__FILE__), 'ouiche')
 
-# Uncomment and change the value below to change the index page's title
-# Ouiche::Words[:index] = 'Index'
+# Uncomment and change the value below to set the title of your wiki
+# Ouiche::Words[:title] = 'Index'
 
 run Ouiche::App

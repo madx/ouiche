@@ -1,112 +1,51 @@
 body {
-  width: 500px;
-  margin: 5% auto;
-  font: normal 1.5em sans-serif;
-  color: #333;
+  color: #333333;
+  width: 42em;
+  margin: 4em auto 1em;
+  font-size: 1.1em;
 }
-
-a:link, a:visited {
-  color: #0cf;
+body a:link, body a:visited, body a:active {
+  color: #338fcc;
   text-decoration: none;
-}
-
-a:hover, a:focus, a:active {
-  text-decoration: underline;
-  outline: none;
-}
-
-h1 {
-  margin-bottom: 0;
-  padding: 0.1em 0.5em;
-  background-color: black;
-  color: white;
-  -moz-border-radius: 12px 12px 0 0;
-  -webkit-border-radius: 12px 12px 0 0;
-}
-h1 a:hover, h1 a:focus, h1 a:active {
-  color: #1df;
-  text-decoration: none;
-}
-
-#page {
-  background-color: #555;
-  padding: 0.5em;
-  margin: 0.5em 0;
-  font-size: 0.75em;
-  color: white;
-  line-height: 140%;
-}
-#page a             { color: #0ef;      }
-#page *:first-child { margin-top: 0;    }
-#page *:last-child  { margin-bottom: 0; }
-
-#error {
-  margin: 0.5em 0;
-  background-color: #f66;
-  padding: 0.5em;
-  font-size: 0.75em;
-  color: black;
-}
-
-#error a:link, #error a:visited {
-  color: #500;
   font-weight: bold;
 }
-
-#error a:hover, #error a:focus, #error a:active {
+body a:hover, body a:focus {
+  color: #1d5275;
   text-decoration: underline;
 }
-
-#menu {
-  padding: 0;
-  list-style-type: none;
-  margin: 0;
+body #ouiche {
+  position: relative;
 }
-
-#menu li {
-  margin: 0.5em 0;
+body #ouiche h1 {
+  width: 80%;
+  margin: 0 0 1em;
+  color: #4d4d4d;
+  border-bottom: 1px solid #999999;
 }
-
-#menu a:link, #menu a:visited {
-  display: block;
-  padding: 0.5em;
-  background-color: #333;
+body #ouiche #page, body #ouiche #error {
+  line-height: 150%;
 }
-
-#menu a:hover, #menu a:focus, #menu a:active {
-  background-color: #444;
-  color: #0cf;
+body #ouiche #foot {
+  width: 80%;
+  margin: 3em 0 0 auto;
+  font-size: 0.9em;
+  text-align: right;
+  border-top: 1px solid #999999;
+  color: gray;
+}
+body #ouiche #go_home {
+  position: absolute;
+  top: 0.25em;
+  left: -2em;
+  font-size: 1.5em;
+}
+body #ouiche #go_home a:hover, body #ouiche #go_home a:focus {
   text-decoration: none;
 }
-
-#foot {
-  margin: 0;
-  color: white;
-  background-color: black;
-  -moz-border-radius: 0 0 12px 12px;
-  -webkit-border-radius: 0 0 12px 12px;
-  font-size: 0.5em;
-  padding: 0.5em;
-  text-align: center;
-  font-style: italic;
-}
-
-
-#page code {
-  background-color: #eee;
-  color: #333;
-  border: 1px solid #ccc;
-  padding: 0 2px;
-}
-
-#page pre {
-  background-color: #eee;
-  border: 1px solid #ccc;
-  font-size: 0.8em;
-  overflow: auto;
-}
-
-#page pre code {
-  border: none;
-  padding: 0;
+body #ouiche #page pre {
+  width: 90%;
+  margin: 1em auto;
+  background-color: #111;
+  color: #fff;
+  padding: 0.25em 0.5em;
 }
