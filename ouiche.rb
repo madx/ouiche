@@ -52,6 +52,20 @@ module Ouiche
       enable :inline_templates
     end
 
+    helpers do
+      def serve(page)
+        if Ouiche.slugs.member?(page)
+          @page  = Ouiche.read(page)
+          @title = @page.title
+          haml :page
+        else
+          response.status = 404
+          @title = Ouiche::Words[:error]
+          haml :no_page
+        end
+      end
+    end
+
     get '/' do
       @title = Ouiche::Words[:title]
       @index = Ouiche.read('+index')
@@ -64,15 +78,11 @@ module Ouiche
     end
 
     get '/:page' do
-      if Ouiche.slugs.member?(params[:page])
-        @page  = Ouiche.read(params[:page])
-        @title = @page.title
-        haml :page
-      else
-        response.status = 404
-        @title = Ouiche::Words[:error]
-        haml :no_page
-      end
+      serve params[:page]
+    end
+
+    get '/p/:page' do
+      serve '+' + params[:page]
     end
   end
 end
