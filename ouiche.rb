@@ -61,6 +61,7 @@ module Ouiche
         else
           @page  = Ouiche.read(page)
           @title = @page.title
+          haml :page
         end
       end
     end
@@ -78,12 +79,10 @@ module Ouiche
 
     get '/:page' do
       open(params[:page])
-      haml :page
     end
 
     get '/p/:page' do
       open('+' + params[:page])
-      haml :page
     end
   end
 end
