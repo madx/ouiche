@@ -30,3 +30,7 @@ will be the body of the page. Period.
 
 You can have private pages: just prepend the filename with a `+`. You can access
 such pages by visiting `/p/<page>`, and they will be skipped from the index.
+
+Finally you can categorize pages. If there's a `:` in the file name, the part
+before the `:` will be the category, and you should write a page for it. Pages
+that are in a category won't be listed in the index.

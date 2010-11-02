@@ -10,7 +10,7 @@ module Ouiche
   GLOB    = File.join(DATADIR, '*')
 
   Words = {
-    :title   => 'Index',
+    :title   => 'Ouiche',
     :error   => 'Error',
     :no_page => 'No such page.<br /> <a href="/">Return to index</a>',
     :go_home => '<a href="/" title="Return to index">↑</a>',
@@ -29,7 +29,7 @@ module Ouiche
             })
           end
         end
-      }.reject {|p| p.slug[0] == '+'[0] }
+      }.reject {|p| (p.slug.index('+') || 1).zero? || p.slug.index(':') }
     end
 
     def slugs
