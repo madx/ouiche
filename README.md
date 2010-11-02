@@ -8,7 +8,7 @@ files are written in Markdown, so you need to have [RDiscount][3].
 
 It is completely Open-Source (published under the WTFPL): you can do whatever
 you want with the source code, and I'll happily accept any patches or
-improvements (use GitHub for that!). If we meet, you can also buy me a beer :-)
+improvements (use GitHub for that). If we meet, you can also buy me a beer.
 
 [1]: http://ruby-lang.org/
 [2]: http://sinatra.github.com/
@@ -16,7 +16,8 @@ improvements (use GitHub for that!). If we meet, you can also buy me a beer :-)
 
 ## Usage #######################################################################
 
-Pages are stored in the `data/` folder.
+Pages are stored in the `data/` folder. File names will be used in the URLs, so
+pay attention to these.
 
 The file format is easy:
 
@@ -27,5 +28,5 @@ The file format is easy:
 The title will be used as the page title (awesome!), the part after the `---`'s
 will be the body of the page. Period.
 
-If you want a page to be skipped in the index page, just prepend the filename
-with a `+`. You can access such pages by visiting `/p/<page>`
+You can have private pages: just prepend the filename with a `+`. You can access
+such pages by visiting `/p/<page>`, and they will be skipped from the index.
