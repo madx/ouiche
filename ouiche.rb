@@ -105,7 +105,8 @@ __END__
   %head
     %title== #{("%s -" % @page.title) if @page} #{Ouiche::Words[:title]}
     %meta{'http-equiv' => 'Content-Type', :content => "text/html;charset=utf-8"}
-    %link{:rel => 'stylesheet', :href => '/style.css', :type => 'text/css', :media => 'screen', :charset => 'utf-8'}
+    %link{:rel => 'stylesheet', :href => '/style.css', :type => 'text/css',
+          :media => 'screen', :charset => 'utf-8'}
   %body
     #ouiche
       %h1= @title
