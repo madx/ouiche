@@ -2,45 +2,63 @@ body {
   color: #333333;
   width: 42em;
   margin: 4em auto 1em;
-  font-size: 1.1em; }
-  body a:link, body a:visited, body a:active {
-    color: #338fcc;
-    text-decoration: none;
-    font-weight: bold; }
-  body a:hover, body a:focus {
-    color: #1d5275;
-    text-decoration: underline; }
-  body #ouiche {
-    position: relative; }
-    body #ouiche h1 {
-      width: 80%;
-      margin: 0 0 1em;
-      color: #4d4d4d;
-      border-bottom: 1px solid #999999; }
-    body #ouiche #page, body #ouiche #error {
-      line-height: 150%; }
-    body #ouiche #foot {
-      width: 80%;
-      margin: 3em 0 0 auto;
-      font-size: 0.9em;
-      text-align: right;
-      border-top: 1px solid #999999;
-      color: gray; }
-    body #ouiche #go_home {
-      position: absolute;
-      top: 0.25em;
-      left: -2em;
-      font-size: 1.5em; }
-      body #ouiche #go_home a:hover, body #ouiche #go_home a:focus {
-        text-decoration: none; }
-    body #ouiche #page {
-      text-align: justify;
-      line-height: 160%; }
-      body #ouiche #page pre {
-        width: 90%;
-        margin: 1em auto;
-        background-color: #111;
-        color: #fff;
-        padding: 0.25em 0.5em;
-        line-height: 120%;
-        text-align: left; }
+  font-size: 1.1em;
+}
+body a:link, body a:visited, body a:active {
+  color: #338fcc;
+  text-decoration: none;
+  font-weight: bold;
+}
+body a:hover, body a:focus {
+  color: #1d5275;
+  text-decoration: underline;
+}
+body #ouiche {
+  position: relative;
+}
+body #ouiche h1 {
+  width: 80%;
+  margin: 0 0 1em;
+  color: #4d4d4d;
+  border-bottom: 1px solid #999999;
+}
+body #ouiche #page, body #ouiche #error {
+  line-height: 150%;
+}
+body #ouiche ul#menu {
+  list-style-type: none;
+  font-size: 1.25em;
+  background-color: #eee;
+  margin: 0.25em 0.5em;
+  padding: 0.25em 0.5em;
+}
+body #ouiche #foot {
+  width: 80%;
+  margin: 3em 0 0 auto;
+  font-size: 0.9em;
+  text-align: right;
+  border-top: 1px solid #999999;
+  color: gray;
+}
+body #ouiche #go_home {
+  position: absolute;
+  top: 0.25em;
+  left: -2em;
+  font-size: 1.5em;
+}
+body #ouiche #go_home a:hover, body #ouiche #go_home a:focus {
+  text-decoration: none;
+}
+body #ouiche #page {
+  text-align: justify;
+  line-height: 160%;
+}
+body #ouiche #page pre {
+  width: 90%;
+  margin: 1em auto;
+  background-color: #111;
+  color: #fff;
+  padding: 0.25em 0.5em;
+  line-height: 120%;
+  text-align: left;
+}
