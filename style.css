@@ -29,9 +29,11 @@ body #ouiche #page, body #ouiche #error {
 body #ouiche ul#menu {
   list-style-type: none;
   font-size: 1.25em;
+  padding: 0.25em 0.5em;
+}
+body #ouiche ul#menu li {
   background-color: #eee;
   margin: 0.25em 0.5em;
-  padding: 0.25em 0.5em;
 }
 body #ouiche #foot {
   width: 80%;
