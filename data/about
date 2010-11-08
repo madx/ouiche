@@ -1,5 +1,6 @@
 About Ouiche
----
+============
+
 Ouiche is a lightweight personal wiki engine that uses flat text files.
 
 Ouiche is written in [Ruby][1] with the [Sinatra][2] web framework. The data

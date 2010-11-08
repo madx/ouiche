@@ -37,12 +37,12 @@ module Ouiche
     end
 
     def read(slug)
-      file = File.join(DATADIR, slug)
-      title, body, links = File.read(file).split(/^---+$/).map {|l| l.strip }
-      OpenStruct.new({
-        :title => title,
-        :body  => Markdown.new(body).to_html
-      })
+      File.open(File.join(DATADIR, slug)) do |io|
+        return OpenStruct.new({
+          :title => io.readline.chomp, 
+          :body  => (io.rewind; Markdown.new(io.read).to_html)
+        })
+      end
     end
   end
 
@@ -67,8 +67,7 @@ module Ouiche
     end
 
     get '/' do
-      @title = Ouiche::Words[:title]
-      @index = Ouiche.read('+index')
+      @page = Ouiche.read('+index')
       haml :index
     end
 
@@ -89,7 +88,7 @@ end
 
 __END__
 @@ index
-#page~ @index.body
+#page~ @page.body
 %ul#menu
   - Ouiche.pages.each do |page|
     %li
@@ -109,7 +108,6 @@ __END__
           :media => 'screen', :charset => 'utf-8'}
   %body
     #ouiche
-      %h1= @title
       = yield
       %p#foot= Ouiche::Words[:powered]
 
